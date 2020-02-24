@@ -1,7 +1,5 @@
-
+ # BEGIN DELICIOUSLUNCH55 APPENDED BASHRC
  ################################################################
- # APPENDED BASHRC SCRIPT					 
- # TO REVERT CHANGES, DELETE APPENDED SECTION
 
  function randomCowFortune() {
 	COW_RANGE=7
@@ -41,6 +39,5 @@
  echo "Hello Trey"
  echo ""
 
- # END OF APPENDED BASHRC SCRIPT
  ################################################################
-
+ # END DELICIOUSLUNCH55 APPENDED BASHRC
