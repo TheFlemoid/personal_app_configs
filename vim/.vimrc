@@ -10,6 +10,9 @@ set number
 set relativenumber
 syntax enable
 set showcmd
+set lazyredraw
+set wildmenu
+set showmatch
 
 "Search function configuration
 set hlsearch
