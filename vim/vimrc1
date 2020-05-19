@@ -13,8 +13,16 @@ set showcmd
 set lazyredraw
 set wildmenu
 set showmatch
+set smartindent
 
 "Search function configuration
 set hlsearch
 set incsearch
 noremap <leader><space> :nohlsearch<CR>
+
+"Plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+
+call plug#end()
