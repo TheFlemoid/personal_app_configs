@@ -4,6 +4,7 @@ FILE=~/.vimrc
 OLD_VIMRC=~/.vimrc_old
 PLUG=~/.vim/autoload/plug.vim
 
+echo ""
 if [ "$EUID" -eq 0 ]; then
 	echo "This should not be run as root.  Exiting."
 	exit
@@ -33,5 +34,13 @@ fi
 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	fi
 
-vim -c ':PlugInstall'
-vim -c ':qa!'
+vim +slient +PlugInstall +qall
+
+cp ./vimrc2 ~/.vimrc
+chmod 775 ~/.vimrc
+
+echo ""
+echo "----------------------------"
+echo "vimrc Installation Complete"
+echo "----------------------------"
+echo ""

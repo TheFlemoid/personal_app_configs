@@ -1,5 +1,5 @@
 
-"DeliciousLunch55 .vimrc configs
+"TheFlemoid .vimrc configs
 
 "Remap leader to ,
 let mapleader=","
@@ -14,15 +14,19 @@ set lazyredraw
 set wildmenu
 set showmatch
 set smartindent
+set noswapfile
 
 "Search function configuration
 set hlsearch
 set incsearch
 noremap <leader><space> :nohlsearch<CR>
+nmap <leader>gs :G<CR>
 
 "Plugins
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
