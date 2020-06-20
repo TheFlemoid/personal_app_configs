@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-FILE=~/.bashrc
+BASHRC=~/.bashrc
 
-if [ -f "$FILE" ]; then
+echo ""
+if [ "$EUID" -eq 0 ]; then
+	echo "This should not be run as root.  Exiting."
+	exit
+fi
+
+if [ -f "$BASHRC" ]; then
 	echo ".bashrc config file found."
 	echo "Redacting changes from DeliciousLunch55 configs"
 	cp ~/.bashrc .bashTemp
