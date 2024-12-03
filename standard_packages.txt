@@ -1,0 +1,15 @@
+git
+tmux
+vim
+curl
+cowsay
+fortune
+neofetch
+wget
+htop
+keepassxc
+gcc
+make
+cmake
+vlc
+hexchat
