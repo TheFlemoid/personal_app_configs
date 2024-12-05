@@ -13,3 +13,4 @@ tmux
 vim
 vlc
 wget
+xclip
