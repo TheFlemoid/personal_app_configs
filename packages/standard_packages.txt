@@ -7,6 +7,7 @@ git
 hexchat
 htop
 keepassxc
+lrzsz
 make
 neofetch
 tmux
