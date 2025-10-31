@@ -15,8 +15,8 @@ APT_PACKAGES_FILENAME="apt_packages.txt"
 DNF_PACKAGES_FILENAME="dnf_packages.txt"
 
 SCRIPT_DIR=$(dirname "$0")
-
 PACKAGE_ARRAY=""
+INSTALL_CMD="";
 
 #
 # Exits this script if it is not being run as the root user.
@@ -40,16 +40,42 @@ function check_package_manager() {
 }
 
 #
-# Install packages using the 'apt' package manager
+# Generates the installation command based on the package manager
 #
-function install_packages_apt() {
-    apt_packages=${SCRIPT_DIR}/${APT_PACKAGES_FILENAME}
-    readarray -t PACKAGE_ARRAY < $apt_packages
-    echo "Packages to install: ${PACKAGE_ARRAY[*]}"
-    APT_INSTALL_CMD="apt install ${PACKAGE_ARRAY[*]}"
+function generate_install_command() {
+    if [ $APT_MACHINE -eq 0 ]; then
+        echo "This is an apt based machine."
+        apt_packages=${SCRIPT_DIR}/${APT_PACKAGES_FILENAME}
+        readarray -t PACKAGE_ARRAY < $apt_packages
+        echo "Packages to install: ${PACKAGE_ARRAY[*]}"
+        INSTALL_CMD="apt install ${PACKAGE_ARRAY[*]}"
+    fi
+
+    if [ $DNF_MACHINE -eq 0 ]; then
+        echo "This is a dnf based machine."
+        dnf_packages=${SCRIPT_DIR}/${APT_PACKAGES_FILENAME}
+        readarray -t PACKAGE_ARRAY < $dnf_packages
+        echo "Packages to install: ${PACKAGE_ARRAY[*]}"
+        INSTALL_CMD="dnf install ${PACKAGE_ARRAY[*]}"
+    fi
+}
+
+#
+# Run the install command to install packages
+#
+function install_packages() {
     echo "Will now run command:"
-    echo "      $APT_INSTALL_CMD"
-    echo "Enter 'y' to continue..."
+    echo "      $INSTALL_CMD"
+    echo "Press 'y' to continue, or any other character to quit..."
+    read -n1 USER_CONFIRM
+    echo ""
+
+    if [ "$USER_CONFIRM" = "y" ]; then
+        echo "OK."
+        $INSTALL_CMD
+    else
+        exit 0
+    fi
 }
 
 #
@@ -57,17 +83,9 @@ function install_packages_apt() {
 #
 function main() {
     check_root
-
-    # Test
     check_package_manager
-    if [ $DNF_MACHINE -eq 0 ]; then
-        echo "This is a dnf based machine."
-    fi
-
-    if [ $APT_MACHINE -eq 0 ]; then
-        echo "This is an apt based machine."
-        install_packages_apt
-    fi
+    generate_install_command
+    install_packages
 }
 
 main "$@"
