@@ -10,10 +10,10 @@ tmux_backup_path="$HOME/.tmux.conf.backup"
 
 tpm_install_path="$HOME/.tmux/plugins/tpm"
 
-##
+#
 # Checks if this script is being run as root, and exists if so.  This should
 # be run as a normal user to prevent the tmux config from being root owned.
-##
+#
 function check_root() {
     if [ "$EUID" -eq 0 ]; then
         echo "This should not be run as root.  Exiting."
@@ -21,9 +21,9 @@ function check_root() {
     fi
 }
 
-##
+#
 # Checks if the tmux plugin manager is installed, and installs it if not
-##
+#
 function install_tpm() {
     if [ ! -d $tpm_install_path ]; then
         echo "tpm not detected, installing."
@@ -33,10 +33,10 @@ function install_tpm() {
     fi
 }
 
-##
+#
 # Sets the users tmux configuration.  If a config already exists, we make
 # a backup of it before setting the config.
-##
+#
 function set_tmux_config() {
     if [ -f $tmux_conf_path ]; then
         echo "Existing tmux config detected, backing up to: $tmux_backup_path"
@@ -46,9 +46,9 @@ function set_tmux_config() {
     cp $tmux_conf_template $tmux_conf_path
 }
 
-##
+#
 # Initializes tpm plugins as defined in the tmux config.
-##
+#
 function initialize_tpm_plugins() {
     echo "Installing tpm plugins"
    
@@ -63,9 +63,9 @@ function initialize_tpm_plugins() {
     /usr/bin/env bash "$tpm_install_path/bin/install_plugins"
 }
 
-##
+#
 # Main
-##
+#
 function main() {
     echo
     check_root
