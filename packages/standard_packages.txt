@@ -7,9 +7,11 @@ git
 hexchat
 htop
 keepassxc
+lrzsz
 make
 neofetch
 tmux
 vim
 vlc
 wget
+xclip
