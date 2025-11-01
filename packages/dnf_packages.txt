@@ -5,6 +5,7 @@ fortune
 gcc
 git
 hexchat
+hexedit
 htop
 keepassxc
 lrzsz
