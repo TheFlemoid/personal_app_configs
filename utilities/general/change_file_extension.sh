@@ -1,5 +1,13 @@
 #!/usr/bin/bash
 
+# File:         change_file_extension.sh
+# Author:       Franklyn Dahlberg
+# Created:      12 November, 2025
+# Copyright:    2025 (c) Franklyn Dahlberg
+# License:      MIT License (see https://choosealicense.com/licenses/mit/)
+# Description:  Modifies all the files found at the param input directory with
+#               the param 'from_file_extension' to have the 'to_file_extension'
+
 INPUT_DIR=""
 FROM_EXT=""
 TO_EXT=""
