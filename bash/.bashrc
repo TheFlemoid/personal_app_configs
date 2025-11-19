@@ -39,5 +39,7 @@
  echo "Hello Trey"
  echo ""
 
+ alias ll='ls -lh'
+
  ################################################################
  # END DELICIOUSLUNCH55 APPENDED BASHRC
