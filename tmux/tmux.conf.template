@@ -44,8 +44,9 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'erikw/tmux-powerline'
 
-# Set a default layout for tmux, this will run when 'tmux attach' is called (or 'term' via alias)
+# Predefined session
 new -s my_sess # create new session
+#neww -n left # create new window
 split-window -h -t left # create pane 0 (left) and pane 1 (to the right)
 split-window -v # split pane 1 (current pane) in two --> new pane 2 on the bottom
 select-pane -t 0 # go back to left pane
