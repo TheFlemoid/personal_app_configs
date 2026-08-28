@@ -10,6 +10,7 @@
 
 APT_MACHINE=-1;
 DNF_MACHINE=-1;
+PACMAN_MACHINE=-1;
 
 APT_PACKAGES_FILENAME="apt_packages.txt"
 DNF_PACKAGES_FILENAME="dnf_packages.txt"
@@ -37,6 +38,9 @@ function check_package_manager() {
 
     which dnf > /dev/null
     DNF_MACHINE=$?
+
+    which pacman > /dev/null
+    PACMAN_MACHINE=$?
 }
 
 #
@@ -49,14 +53,22 @@ function generate_install_command() {
         readarray -t PACKAGE_ARRAY < $apt_packages
         echo "Packages to install: ${PACKAGE_ARRAY[*]}"
         INSTALL_CMD="apt install ${PACKAGE_ARRAY[*]}"
-    fi
-
-    if [ $DNF_MACHINE -eq 0 ]; then
+    elif [ $DNF_MACHINE -eq 0 ]; then
         echo "This is a dnf based machine."
-        dnf_packages=${SCRIPT_DIR}/${APT_PACKAGES_FILENAME}
+        dnf_packages=${SCRIPT_DIR}/${DNF_PACKAGES_FILENAME}
         readarray -t PACKAGE_ARRAY < $dnf_packages
         echo "Packages to install: ${PACKAGE_ARRAY[*]}"
         INSTALL_CMD="dnf install ${PACKAGE_ARRAY[*]}"
+    elif [ $PACMAN_MACHINE -eq 0 ]; then
+        echo "This is a pacman based machine."
+        pacman_packages=${SCRIPT_DIR}/${PACMAN_PACKAGES_FILENAME}
+        readarray -t PACKAGE_ARRAY < $pacman_packages
+        echo "Packages to install: ${PACKAGE_ARRAY[*]}"
+        INSTALL_CMD="pacman -S ${PACKAGE_ARRAY[*]}"
+    else
+        echo "Could not determine what package manager to use for this machine."
+        echo "Exiting."
+        exit 1
     fi
 }
 
